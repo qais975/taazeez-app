@@ -1,0 +1,9 @@
+{
+  "name": "Taazeez",
+  "short_name": "Taazeez",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6fff9",
+  "theme_color": "#0a8a52",
+  "icons": []
+}

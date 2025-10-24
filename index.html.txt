@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taazeez | B2B Pharma Platform</title>
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f6fff9;
+        color: #024731;
+        text-align: center;
+        padding: 4rem 1rem;
+        margin: 0;
+      }
+      header {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #0a8a52;
+        margin-bottom: 2rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+      }
+      a {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 0.8rem 2rem;
+        background-color: #0a8a52;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+      a:hover {
+        background-color: #07663c;
+      }
+    </style>
+  </head>
+  <body>
+    <header>🌿 Taazeez</header>
+    <h1>Welcome to Taazeez</h1>
+    <p>Your trusted link between pharmacies and suppliers.</p>
+    <p>This is the first experimental version 💚</p>
+    <a href="#">Login coming soon</a>
+  </body>
+</html>
