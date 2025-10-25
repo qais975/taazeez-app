@@ -1,53 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Taazeez | B2B Pharma Platform</title>
-    <link rel="manifest" href="manifest.json" />
+    <title>تعزيز | Taazeez Platform</title>
+    <meta name="theme-color" content="#4f46e5" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
     <style>
       body {
-        font-family: Arial, sans-serif;
-        background-color: #f6fff9;
-        color: #024731;
-        text-align: center;
-        padding: 4rem 1rem;
+        font-family: "Cairo", system-ui, sans-serif;
         margin: 0;
+        padding: 0;
+        background-color: #f4f5fa;
+        color: #333;
       }
       header {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: #0a8a52;
-        margin-bottom: 2rem;
-      }
-      h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-      p {
-        font-size: 1.2rem;
-        margin: 0.5rem 0;
-      }
-      a {
-        display: inline-block;
-        margin-top: 2rem;
-        padding: 0.8rem 2rem;
-        background-color: #0a8a52;
+        background-color: #4f46e5;
         color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: 0.3s;
+        text-align: center;
+        padding: 22px;
+        font-size: 20px;
+        font-weight: bold;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
       }
-      a:hover {
-        background-color: #07663c;
+      main {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      }
+      h2 {
+        margin-top: 0;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #3730a3;
+      }
+      .lang-switch {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .lang-switch button {
+        width: auto;
+        padding: 8px 14px;
+        margin: 0 5px;
+        background: #e5e7eb;
+        color: #111;
+      }
+      .result-box {
+        background: #f9fafb;
+        border-radius: 10px;
+        padding: 12px;
+        margin-top: 12px;
+        font-size: 15px;
+        border: 1px solid #eee;
+        white-space: pre-wrap;
+      }
+      footer {
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        margin-top: 20px;
       }
     </style>
   </head>
   <body>
-    <header>🌿 Taazeez</header>
-    <h1>Welcome to Taazeez</h1>
-    <p>Your trusted link between pharmacies and suppliers.</p>
-    <p>This is the first experimental version 💚</p>
-    <a href="#">Login coming soon</a>
+    <header id="title">تعزيز — منصة الموردين والصيدليات</header>
+    <main>
+      <h2 id="subtitle">ابحث عن أفضل عرض متاح</h2>
+      <input id="q" placeholder="أدخل اسم المنتج (مثلاً: بانادول)" />
+      <button onclick="search()">بحث</button>
+      <div id="result" class="result-box">نتائج البحث ستظهر هنا...</div>
+      <div class="lang-switch">
+        <button onclick="setLang('ar')">🇸🇦 عربي</button>
+        <button onclick="setLang('en')">🇬🇧 English</button>
+      </div>
+    </main>
+    <footer>©️ 2025 Taazeez Platform — جميع الحقوق محفوظة</footer>
+
+    <script>
+      let lang = "ar";
+      const texts = {
+        ar: {
+          title: "تعزيز — منصة الموردين والصيدليات",
+          subtitle: "ابحث عن أفضل عرض متاح",
+          placeholder: "أدخل اسم المنتج (مثلاً: بانادول)",
+          button: "بحث",
+          noResult: "لا توجد نتائج حالياً. جرّب كلمة أخرى.",
+        },
+        en: {
+          title: "Taazeez — B2B Platform",
+          subtitle: "Find the Best Available Offer",
+          placeholder: "Enter product name (e.g., Panadol)",
+          button: "Search",
+          noResult: "No offers found. Try a different keyword.",
+        },
+      };
+
+      function setLang(l) {
+        lang = l;
+        document.documentElement.lang = l;
+        document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+        const t = texts[l];
+        document.getElementById("title").textContent = t.title;
+        document.getElementById("subtitle").textContent = t.subtitle;
+        document.getElementById("q").placeholder = t.placeholder;
+        document.querySelector("button").textContent = t.button;
+      }
+
+      async function search() {
+        const q = document.getElementById("q").value.trim();
+        if (!q) return;
+        const r = await fetch(`/bot/retailer?q=${encodeURIComponent(q)}`);
+        const j = await r.json();
+        document.getElementById("result").textContent = j.offers?.length
+          ? JSON.stringify(j, null, 2)
+          : texts[lang].noResult;
+      }
+    </script>
   </body>
 </html>
